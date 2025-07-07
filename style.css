@@ -5,8 +5,8 @@ body {
     background-color: #eef2f7;
     color: #333;
     display: flex;
-    flex-direction: column; /* 세로 정렬 */
-    align-items: center; /* 가로 중앙 정렬 */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     min-height: 100vh;
 }
@@ -20,19 +20,11 @@ h1 {
 
 h2 {
     color: #0056b3;
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 20px; /* 섹션 내 h2의 상단 마진 줄임 */
+    margin-bottom: 15px;
     font-size: 1.6em;
     border-bottom: 2px solid #0056b3;
     padding-bottom: 5px;
-    text-align: center;
-}
-
-h3 {
-    color: #007bff;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 1.3em;
     text-align: center;
 }
 
@@ -42,10 +34,45 @@ h3 {
     border-radius: 10px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     width: 95%;
-    max-width: 800px; /* 기존 가로 폭으로 유지 */
+    max-width: 1200px; /* 넓은 화면에서 좌우 배치를 위해 최대 너비 늘림 */
     box-sizing: border-box;
-    /* 이전 좌우 분할을 위한 flexbox 속성들은 제거되었습니다. */
+    display: flex; /* 내부 요소(flex-group, button)를 세로로 정렬 */
+    flex-direction: column;
+    align-items: center; /* 내부 요소 중앙 정렬 */
 }
+
+/* --- 새로운 Flexbox 그룹 스타일 --- */
+.flex-group {
+    display: flex;
+    flex-wrap: wrap; /* 화면이 작아지면 자동으로 줄 바꿈 */
+    gap: 30px; /* 섹션 간 간격 */
+    width: 100%;
+    justify-content: center; /* 섹션들을 중앙에 배치 */
+}
+
+.input-section, .output-section {
+    flex: 1; /* 가용 공간을 균등하게 차지 */
+    min-width: 350px; /* 각 섹션의 최소 너비 설정 (너무 좁아지지 않게) */
+    box-sizing: border-box;
+    padding: 15px; /* 내부 여백 추가 */
+    border: 1px solid #e0e0e0; /* 섹션 구분선 */
+    border-radius: 8px;
+    background-color: #fcfcfc;
+}
+
+/* 모바일 화면에서는 세로로 정렬 */
+@media (max-width: 850px) { /* 이 breakpoint 값을 필요에 따라 조정 */
+    .flex-group {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .input-section, .output-section {
+        min-width: unset; /* 모바일에서는 최소 너비 제한 해제 */
+        width: 100%;
+    }
+}
+/* --- Flexbox 그룹 스타일 끝 --- */
+
 
 .input-group {
     margin-bottom: 15px;
@@ -60,6 +87,7 @@ h3 {
     color: #555;
 }
 
+.input-group input[type="text"],
 .input-group input[type="number"] {
     width: 100%;
     padding: 10px;
@@ -69,6 +97,34 @@ h3 {
     box-sizing: border-box;
 }
 
+/* 라디오 버튼 그룹 스타일 */
+.radio-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+.radio-group label {
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+/* 체크박스 그룹 스타일 */
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    width: auto;
+}
+
+
 button {
     background-color: #28a745;
     color: white;
@@ -77,9 +133,10 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.1em;
-    margin-top: 20px;
+    margin-top: 30px; /* 버튼 상단 마진 조정 */
     transition: background-color 0.3s ease;
     width: 100%;
+    max-width: 400px; /* 버튼 너비 제한 */
 }
 
 button:hover {
@@ -121,9 +178,9 @@ hr {
     font-weight: bold;
     margin-top: 20px;
     text-align: center;
-    color: #d9534f; /* 기본적으로 손해일 경우 붉은색 */
+    color: #d9534f;
 }
 
 .conclusion.profit {
-    color: #28a745; /* 이득일 경우 녹색 */
+    color: #28a745;
 }

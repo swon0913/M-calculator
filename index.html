@@ -10,118 +10,123 @@
     <h1>메이플 MVP 비용 계산기</h1>
 
     <div class="calculator-container">
-        <h2>기본 정보 입력</h2>
-        <div class="input-group">
-            <label for="mesoRate">현재 메소 시세 (1억 메소 당 현금, 원):</label>
-            <input type="number" id="mesoRate" placeholder="예: 2500">
-        </div>
-        <div class="input-group">
-            <label for="mesoMarketRate">메소 마켓 1억 당 메이플포인트 (MP):</label>
-            <input type="number" id="mesoMarketRate" placeholder="예: 3550">
-        </div>
-        <div class="input-group">
-            <label for="giftRatio">선물식 비율 (1억 메소 당 현금, 원):</label>
-            <input type="number" id="giftRatio" placeholder="예: 7500">
-        </div>
-        <div class="input-group">
-            <label for="chargeDiscountRate">캐시 충전 할인율 (%):</label>
-            <input type="number" id="chargeDiscountRate" placeholder="예: 7">
-        </div>
+        <div class="flex-group">
+            <div class="input-section">
+                <h2>기본 설정</h2>
+                <div class="input-group">
+                    <label for="mesoRate">현재 메소 시세 (1억 메소 당 현금, 원):</label>
+                    <input type="number" id="mesoRate" value="2500" placeholder="예: 2500">
+                </div>
+                <div class="input-group">
+                    <label for="mesoMarketRate">메소 마켓 1억 당 메이플포인트 (MP):</label>
+                    <input type="number" id="mesoMarketRate" value="3550" placeholder="예: 3550">
+                </div>
+                <div class="input-group">
+                    <label for="chargeDiscountRate">캐시 충전 할인율 (%):</label>
+                    <input type="number" id="chargeDiscountRate" value="7" placeholder="예: 7">
+                </div>
+                <div class="input-group">
+                    <label>경매장 수수료:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="fee5" name="auctionFee" value="0.05" checked>
+                        <label for="fee5">5% (브론즈)</label>
+                        <input type="radio" id="fee3" name="auctionFee" value="0.03">
+                        <label for="fee3">3% (실버 이상/PC방)</label>
+                    </div>
+                </div>
 
+                <hr>
+
+                <h2>아이템별 MVP작 분석</h2>
+                <div class="input-group">
+                    <label for="itemName">캐시 아이템명:</label>
+                    <input type="text" id="itemName" value="원더바니" placeholder="예: 원더바니">
+                </div>
+                <div class="input-group">
+                    <label for="cashPrice">캐시 가격 (원):</label>
+                    <input type="number" id="cashPrice" value="5000" placeholder="예: 5000">
+                </div>
+                <div class="input-group checkbox-group">
+                    <input type="checkbox" id="mileageApplied">
+                    <label for="mileageApplied">마일리지 적용 (캐시 가격의 30% 마일리지 사용 가정)</label>
+                </div>
+                <div class="input-group">
+                    <label for="auctionMesoPrice">경매장 판매 메소 가격 (억 단위):</label>
+                    <input type="number" id="auctionMesoPrice" value="0.5" step="0.01" placeholder="예: 0.5 (5천만 메소)">
+                </div>
+                <div class="input-group">
+                    <label for="purchaseCount">구입 개수:</label>
+                    <input type="number" id="purchaseCount" value="1" placeholder="예: 1">
+                </div>
+            </div>
+
+            <div class="output-section">
+                <h2>결과 요약</h2>
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th>값</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>총 사용 캐시 (할인 적용)</td>
+                            <td id="totalUsedCash">0원</td>
+                        </tr>
+                        <tr>
+                            <td>총 회수 메소 (수수료 적용)</td>
+                            <td id="totalRecoveredMeso">0억 메소</td>
+                        </tr>
+                        <tr>
+                            <td>회수 금액 (현금)</td>
+                            <td id="recoveredCash">0원</td>
+                        </tr>
+                        <tr>
+                            <td>본전 가격 (아이템 1개당 필요 메소)</td>
+                            <td id="breakevenMeso">0억 메소</td>
+                        </tr>
+                        <tr>
+                            <td>이익률 (회수 금액 / 사용 캐시)</td>
+                            <td id="profitMargin">0%</td>
+                        </tr>
+                        <tr>
+                            <td>마일리지 효율 (절감액)</td>
+                            <td id="mileageEfficiency">0원</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="conclusion" id="overallConclusion"></p>
+
+                <hr>
+
+                <h2>추가 정보 (MVP작 일반 효율)</h2>
+                <table class="result-table">
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th>비용 (현금)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1만 메이플포인트 (MP) 당 비용</td>
+                            <td id="costPer10kMP">0.00원</td>
+                        </tr>
+                        <tr>
+                            <td>1억 메소 당 비용 (엄거래)</td>
+                            <td id="costPer1BillionMesoUmguarae">0.00원</td>
+                        </tr>
+                        <tr>
+                            <td>1억 메소 당 비용 (메소마켓)</td>
+                            <td id="costPer1BillionMesoMesoMarket">0.00원</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="conclusion" id="basicMvpConclusion"></p>
+            </div>
+        </div>
         <button id="calculateBtn">계산하기</button>
-
-        <hr>
-
-        <h3>추가 정보</h3>
-        <table class="result-table">
-            <thead>
-                <tr>
-                    <th>항목</th>
-                    <th>비용 (현금)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1만 메이플포인트 (MP) 당 비용</td>
-                    <td id="costPer10kMP">0.00원</td>
-                </tr>
-                <tr>
-                    <td>1억 메소 당 비용 (엄거래)</td>
-                    <td id="costPer1BillionMesoUmguarae">0.00원</td>
-                </tr>
-                <tr>
-                    <td>1억 메소 당 비용 (메소마켓)</td>
-                    <td id="costPer1BillionMesoMesoMarket">0.00원</td>
-                </tr>
-            </tbody>
-        </table>
-        <hr>
-        <h2>결과 분석</h2>
-
-        <h3>기초 MVP작 : 선물식과 메소마켓 비교</h3>
-        <table class="result-table">
-            <thead>
-                <tr>
-                    <th>항목</th>
-                    <th>선물식</th>
-                    <th>메소마켓</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1만원 실적당 비용 (현금)</td>
-                    <td id="basicGiftCost">0.00원</td>
-                    <td id="basicMesoMarketCost">0.00원</td>
-                </tr>
-            </tbody>
-        </table>
-        <p class="conclusion" id="basicConclusion"></p>
-
-        <hr>
-
-        <h3>심화 MVP작 : 경매장 최소 판매 비용</h3>
-        <table class="result-table">
-            <thead>
-                <tr>
-                    <th>항목</th>
-                    <th>캐시 가격</th>
-                    <th>경매장 최소판매가 (메소)</th>
-                    <th>1만원 실적당 비용 (현금)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>캐시</td>
-                    <td><input type="number" id="auctionCashPrice" placeholder="예: 1000">원</td>
-                    <td id="auctionMinSellMeso">0.00억 메소</td>
-                    <td id="auctionMinCost">0.00원</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <hr>
-
-        <h3>심화 MVP작 : 경매장 판매 손익</h3>
-        <table class="result-table">
-            <thead>
-                <tr>
-                    <th>항목</th>
-                    <th>캐시 가격</th>
-                    <th>판매가 (메소)</th>
-                    <th>손익 (현금)</th>
-                    <th>1만원 실적당 손익 (현금)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>캐시</td>
-                    <td><input type="number" id="profitCashPrice" placeholder="예: 1000">원</td>
-                    <td><input type="number" id="profitSellMeso" step="0.01" placeholder="예: 0.05">억 메소</td>
-                    <td id="profitResult">0원</td>
-                    <td id="profitPer10kResult">0원</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 
     <script src="script.js"></script>
